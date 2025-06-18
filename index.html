@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Nor</title>
-  </head>
-  <body>
-    <div id="root"></div>
-    <!-- Vite injects the React scripts automatically -->
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nor — Roblox Dev Tool</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background-color: #0f172a;
+      color: #e0e7ff;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      padding: 2rem;
+      box-sizing: border-box;
+    }
+    main {
+      max-width: 600px;
+      margin: auto;
+      flex-grow: 1;
+    }
+    h1 {
+      color: #60a5fa;
+      margin-bottom: 0.5rem;
+    }
+    h2 {
+      color: #93c5fd;
+      margin-top: 2rem;
+      margin-bottom: 0.5rem;
+    }
+    p, ul {
+      line-height: 1.5;
+      color: #cbd5e1;
+    }
+    ul {
+      padding-left: 1.5rem;
+    }
+    a.download-btn {
+      display: inline-block;
+      background-color: #2563eb;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 0.5rem;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+      margin-top: 1rem;
+    }
+    a.download-btn:hover {
+      background-color: #1d4ed8;
+    }
+    footer {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #94a3b8;
+      margin-top: 3rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Nor</h1>
+    <p>A lightweight, developer-focused DLL injector for Roblox. Designed for developers to test and automate, not for cheating.</p>
+
+    <h2>Features</h2>
+    <ul>
+      <li>Fast and stable injection process</li>
+      <li>Clean UI with dev-focused design</li>
+      <li>Supports automation and script debugging</li>
+      <li>Safe for personal development use</li>
+    </ul>
+
+    <h2>Download</h2>
+    <a href="#" class="download-btn">Download Nor</a>
+  </main>
+
+  <footer>
+    &copy; <span id="year"></span> Nor Dev Tool. Built for Roblox developers.
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
 </html>
