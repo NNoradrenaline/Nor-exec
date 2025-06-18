@@ -3,142 +3,130 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nor — Roblox Dev Tool</title>
+  <title>Nor — Roblox Executor</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
 
-    :root {
-      --main-color: #3b82f6;
-      --bg1: #0f172a;
-      --bg2: #1e293b;
-      --bg3: #111827;
-      --text: #e0e7ff;
-      --accent: #60a5fa;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    html, body {
-      margin: 0;
-      padding: 0;
+    body, html {
+      margin: 0; padding: 0;
       height: 100%;
-      font-family: 'Inter', sans-serif;
-      color: var(--text);
-      background: linear-gradient(-45deg, var(--bg1), var(--bg2), var(--bg3));
-      background-size: 400% 400%;
-      animation: gradientShift 12s ease infinite;
+      background: #0a0b0f;
+      font-family: 'Share Tech Mono', monospace;
+      color: #a8ff60;
+      background-image: linear-gradient(rgba(10,11,15,0.3) 1px, transparent 1px);
+      background-size: 100% 4px;
+      overflow-x: hidden;
     }
 
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
+    .wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100%;
+      padding: 1rem;
+      text-align: center;
     }
 
-    main {
+    .console {
+      background: rgba(0,0,0,0.6);
+      border: 1px solid #232528;
+      border-radius: 8px;
+      padding: 2rem 2.5rem;
       max-width: 640px;
-      margin: 5vh auto;
-      background: rgba(15, 23, 42, 0.9);
-      border-radius: 1rem;
-      padding: 2.5rem 2rem;
-      box-shadow: 0 12px 32px rgba(0, 0, 0, 0.4);
-      backdrop-filter: blur(12px);
-      animation: fadeIn 1.2s ease-out;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
+      width: 100%;
+      box-shadow: 0 0 16px rgba(72,187,120,0.4);
+      position: relative;
     }
 
     h1 {
-      font-size: 2.75rem;
-      margin-bottom: 0.25rem;
-      color: var(--accent);
-      text-shadow: 0 0 8px rgba(96, 165, 250, 0.5);
-      animation: fadeIn 1.5s ease-out;
+      font-size: 2.5rem;
+      margin: 0 0 1rem;
+      opacity: 0; animation: typing 2s 0.5s forwards;
+    }
+
+    @keyframes typing {
+      from { width: 0; opacity: 1; }
+      to { width: 100%; opacity: 1; }
+    }
+
+    .typing-cursor {
+      display: inline-block;
+      background-color: #a8ff60;
+      margin-left: 3px;
+      width: 8px; height: 28px;
+      animation: blink 0.8s step-end infinite;
+    }
+    @keyframes blink {
+      50% { background-color: transparent; }
     }
 
     p.lead {
-      font-size: 1.15rem;
-      color: #cbd5e1;
-      margin-bottom: 1.75rem;
-      line-height: 1.6;
-      animation: fadeIn 1.6s ease-out;
+      margin: 0 0 1.5rem;
+      font-size: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s 2s forwards;
     }
 
-    h2 {
-      font-size: 1.5rem;
-      color: #93c5fd;
-      margin-top: 2rem;
-      border-bottom: 2px solid var(--main-color);
-      padding-bottom: 0.3rem;
-      animation: fadeIn 1.7s ease-out;
+    h2, ul, .download-btn {
+      opacity: 0;
+      animation: fadeIn 1s ease forwards;
     }
+    h2 { animation-delay: 2.3s; }
+    ul { animation-delay: 2.5s; margin: 0 0 1.5rem; text-align: left; }
+    .download-btn { animation-delay: 2.7s; }
 
-    ul {
-      padding-left: 1.5rem;
-      margin-top: 0.75rem;
-      color: #d1d5db;
-      animation: fadeIn 1.8s ease-out;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
+    h2 { font-size: 1.25rem; margin-bottom: 0.5rem; color: #c0ff8a; }
+    ul li { margin: 0.4rem 0; }
 
     .download-btn {
       display: inline-block;
-      background: linear-gradient(90deg, var(--main-color), #2563eb);
-      color: white;
-      padding: 0.9rem 2.2rem;
+      background: #48bb78;
+      color: #0a0b0f;
+      padding: 0.75rem 1.75rem;
       text-decoration: none;
-      border-radius: 10px;
-      font-weight: 700;
-      font-size: 1.125rem;
-      margin-top: 2rem;
-      box-shadow: 0 6px 20px rgba(59, 130, 246, 0.6);
-      transition: all 0.3s ease;
-      animation: fadeIn 2s ease-out;
+      border-radius: 6px;
+      font-weight: bold;
+      box-shadow: 0 0 8px rgba(72,187,120,0.6);
+      transition: transform 0.2s, box-shadow 0.2s;
     }
-
     .download-btn:hover {
-      background: linear-gradient(90deg, #2563eb, #1d4ed8);
-      box-shadow: 0 8px 28px rgba(37, 99, 235, 0.8);
       transform: translateY(-2px);
+      box-shadow: 0 0 16px rgba(72,187,120,0.8);
     }
 
-    footer {
-      text-align: center;
-      font-size: 0.875rem;
-      color: #94a3b8;
-      margin-top: 3rem;
-      animation: fadeIn 2.2s ease-out;
+    .footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0;
+      animation: fadeIn 1s 3s forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
     }
   </style>
 </head>
 <body>
-  <main>
-    <h1>Nor</h1>
-    <p class="lead">A powerful executor for Roblox with a built-in output console and script hub. Designed for developers to test, debug, and automate with ease.</p>
 
-    <h2>Features</h2>
-    <ul>
-      <li>Fast & stable DLL injection</li>
-      <li>Live output console</li>
-      <li>Integrated script hub</li>
-      <li>Sleek and developer-friendly UI</li>
-    </ul>
+  <div class="wrapper">
+    <div class="console">
+      <h1>Nor<span class="typing-cursor"></span></h1>
+      <p class="lead">Executor • Output Console • Script Hub</p>
 
-    <h2>Download</h2>
-    <a href="#" class="download-btn">Download Nor</a>
-  </main>
+      <h2>Features</h2>
+      <ul>
+        <li>Fast & reliable DLL injection</li>
+        <li>Built-in output console</li>
+        <li>Interactive script hub</li>
+        <li>Developer‑focused UI</li>
+      </ul>
 
-  <footer>
-    &copy; <span id="year"></span> Nor Executor — Built for Roblox Developers
-  </footer>
+      <a href="#" class="download-btn">Download Nor</a>
+
+      <div class="footer">&copy; <span id="year"></span> Nor Executor — Built for Roblox Devs</div>
+    </div>
+  </div>
 
   <script>
     document.getElementById('year').textContent = new Date().getFullYear();
