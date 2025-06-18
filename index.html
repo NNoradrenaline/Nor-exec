@@ -1,165 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nor — Roblox Script Injector</title>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
-
-    html, body {
-      margin: 0;
-      padding: 0;
-      height: 100%;
-      overflow: hidden;
-      font-family: 'Share Tech Mono', monospace;
-      background: #0a0b0f;
-      color: #a8ff60;
-    }
-
-    #matrix {
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: -1;
-      width: 100%;
-      height: 100%;
-      background: #0a0b0f;
-    }
-
-    .wrapper {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-      padding: 1rem;
-      text-align: center;
-      z-index: 1;
-      position: relative;
-    }
-
-    .console {
-      background: rgba(0,0,0,0.6);
-      border: 1px solid #232528;
-      border-radius: 8px;
-      padding: 2.5rem;
-      max-width: 640px;
-      width: 100%;
-      box-shadow: 0 0 16px rgba(72,187,120,0.4);
-    }
-
-    h1 {
-      font-size: 2.5rem;
-      margin-bottom: 1rem;
-    }
-
-    p.lead {
-      font-size: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    h2 {
-      font-size: 1.25rem;
-      color: #c0ff8a;
-      margin-bottom: 0.5rem;
-    }
-
-    ul {
-      text-align: left;
-      padding-left: 1rem;
-      margin-bottom: 2rem;
-    }
-
-    ul li {
-      margin-bottom: 0.5rem;
-    }
-
-    .download-btn {
-      display: inline-block;
-      background: #48bb78;
-      color: #0a0b0f;
-      padding: 0.75rem 1.75rem;
-      text-decoration: none;
-      border-radius: 6px;
-      font-weight: bold;
-      box-shadow: 0 0 8px rgba(72,187,120,0.6);
-      transition: all 0.3s ease;
-    }
-
-    .download-btn:hover {
-      box-shadow: 0 0 14px rgba(72,187,120,1);
-      transform: translateY(-2px);
-    }
-
-    .footer {
-      font-size: 0.8rem;
-      margin-top: 2rem;
-      color: #94a3b8;
-    }
-  </style>
-</head>
-<body>
-
-<canvas id="matrix"></canvas>
-
-<div class="wrapper">
-  <div class="console">
-    <h1>Nor</h1>
-    <p class="lead">Script Injector • Output Console • Script Hub</p>
-
-    <h2>Features</h2>
-    <ul>
-      <li>Fast & reliable script injection</li>
-      <li>Built-in output console</li>
-      <li>Interactive script hub</li>
-      <li>Developer‑focused UI</li>
-    </ul>
-
-    <a href="#" class="download-btn">Download Nor</a>
-    <div class="footer">&copy; <span id="year"></span> Nor Executor — Built for Roblox Devs</div>
-  </div>
-</div>
-
-<script>
-  document.getElementById('year').textContent = new Date().getFullYear();
-
-  const canvas = document.getElementById("matrix");
-  const ctx = canvas.getContext("2d");
-
-  canvas.height = window.innerHeight;
-  canvas.width = window.innerWidth;
-
-  const letters = "01ABCDEFGHIJKLMNOPQRSTUVWXYZ#$%&@";
-  const fontSize = 14;
-  const columns = canvas.width / fontSize;
-
-  const drops = Array(Math.floor(columns)).fill(1);
-
-  function draw() {
-    ctx.fillStyle = "rgba(10, 11, 15, 0.1)";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-
-    ctx.fillStyle = "#39FF14";
-    ctx.font = fontSize + "px 'Share Tech Mono'";
-
-    for (let i = 0; i < drops.length; i++) {
-      const text = letters[Math.floor(Math.random() * letters.length)];
-      ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-
-      if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-        drops[i] = 0;
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Nor - Roblox Script Injector</title>
+    <link rel="icon" href="/favicon.ico" />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono&display=swap" rel="stylesheet">
+    <style>
+      body {
+        margin: 0;
+        font-family: 'JetBrains Mono', monospace;
+        background: radial-gradient(ellipse at center, #0f0f0f 0%, #000000 100%);
+        color: white;
+        overflow-x: hidden;
       }
 
-      drops[i]++;
-    }
-  }
+      .animated-bg {
+        position: fixed;
+        top: 0; left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        background: url('https://media.giphy.com/media/3ov9jNziFTMfzSumAw/giphy.gif') center center / cover no-repeat;
+        opacity: 0.08;
+        z-index: 0;
+      }
 
-  setInterval(draw, 50);
+      .container {
+        position: relative;
+        z-index: 2;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+        text-align: center;
+      }
 
-  window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-  });
-</script>
-</body>
+      h1 {
+        font-size: 3rem;
+        background: linear-gradient(to right, #00ffff, #ff00ff);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        animation: pulse 3s ease-in-out infinite;
+      }
+
+      p {
+        font-size: 1.1rem;
+        color: #cccccc;
+        margin-bottom: 2rem;
+      }
+
+      .btn {
+        display: inline-block;
+        background: #111;
+        color: white;
+        padding: 1rem 2rem;
+        border: 1px solid #00ffff;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s ease;
+      }
+
+      .btn:hover {
+        background: #00ffff;
+        color: black;
+      }
+
+      @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.7; }
+      }
+
+      footer {
+        margin-top: 3rem;
+        font-size: 0.9rem;
+        color: #555;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="animated-bg"></div>
+    <div class="container">
+      <h1>Nor</h1>
+      <p>A sleek Roblox script injector with output console and script hub, built for developers.</p>
+      <a class="btn" href="/Nor.zip" download>Download Nor</a>
+      <footer>
+        <p>© 2025 Noradrenaline. All rights reserved.</p>
+      </footer>
+    </div>
+  </body>
 </html>
